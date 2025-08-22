@@ -5,7 +5,13 @@ import User from "../models/User.model.js";
 import { JWT_SECRET, NODE_ENV, SENDER_EMAIL } from "../configs/env.js";
 import transporter from "../configs/nodemailer.js";
 
-
+/**
+ * User Registration Function
+ * Creates a new user account with email verification
+ * @param {Object} req - Express request object containing name, email, password
+ * @param {Object} res - Express response object
+ * @returns {Object} JSON response with success status and message
+ */
 export const register = async (req , res) => {
 
     const session = await mongoose.startSession();
@@ -83,7 +89,13 @@ export const register = async (req , res) => {
     }
 }
 
-
+/**
+ * User Login Function
+ * Authenticates user credentials and creates session
+ * @param {Object} req - Express request object containing email, password
+ * @param {Object} res - Express response object
+ * @returns {Object} JSON response with success status and message
+ */
 export const login = async (req ,res) => {
 
     const {email , password} = req.body;
@@ -137,6 +149,13 @@ export const login = async (req ,res) => {
     }
 }
 
+/**
+ * User Logout Function
+ * Clears authentication cookies and ends user session
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @returns {Object} JSON response with success status and message
+ */
 export const logout = async (req , res) => {
 
     try {
@@ -160,6 +179,13 @@ export const logout = async (req , res) => {
     }
 }
 
+/**
+ * Send Email Verification OTP Function
+ * Generates and sends OTP for email verification to authenticated users
+ * @param {Object} req - Express request object containing userId from middleware
+ * @param {Object} res - Express response object
+ * @returns {Object} JSON response with success status and message
+ */
 export const sendVerifyOTP = async (req , res) => {
 
     const session = await mongoose.startSession();
@@ -213,6 +239,13 @@ export const sendVerifyOTP = async (req , res) => {
     }
 }
 
+/**
+ * Email Verification Function
+ * Verifies user's email using OTP and marks account as verified
+ * @param {Object} req - Express request object containing userId and OTP
+ * @param {Object} res - Express response object
+ * @returns {Object} JSON response with success status and message
+ */
 export const verifyEmail = async (req , res) => {
 
     const {userId} = req;
@@ -290,6 +323,13 @@ export const verifyEmail = async (req , res) => {
     }
 }
 
+/**
+ * Authentication Status Check Function
+ * Checks if user is authenticated (used by middleware)
+ * @param {Object} req - Express request object with userId from middleware
+ * @param {Object} res - Express response object
+ * @returns {Object} JSON response with authentication status
+ */
 export const isAuthenticated = async (req , res) => {
 
     try {
@@ -304,6 +344,13 @@ export const isAuthenticated = async (req , res) => {
     }
 }
 
+/**
+ * Send Password Reset OTP Function
+ * Generates and sends OTP for password reset to user's email
+ * @param {Object} req - Express request object containing email
+ * @param {Object} res - Express response object
+ * @returns {Object} JSON response with success status and message
+ */
 //Send password reset otp 
 export const sendResetOtp = async (req , res) => {
 
@@ -367,6 +414,13 @@ export const sendResetOtp = async (req , res) => {
     }
 }
 
+/**
+ * Reset Password Function
+ * Verifies OTP and updates user's password with new hashed password
+ * @param {Object} req - Express request object containing email, OTP, and newPassword
+ * @param {Object} res - Express response object
+ * @returns {Object} JSON response with success status and message
+ */
 //reset user password
 export const resetPassword = async (req , res) => {
 

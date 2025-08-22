@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 import { MONGODB_URI } from "./env.js";
 
+/**
+ * Database Connection Function
+ * Establishes connection to MongoDB using Mongoose
+ * @returns {Promise<void>} - Resolves when connection is successful
+ */
 const connectDB = async () => {
 
     try {

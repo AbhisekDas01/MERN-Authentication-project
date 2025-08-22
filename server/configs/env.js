@@ -1,8 +1,9 @@
 import { config } from "@dotenvx/dotenvx";
 
+// Load environment variables from .env file
 config({path: '.env'});
 
-
+// Export environment variables for use across the application
 export const {
 
     PORT,

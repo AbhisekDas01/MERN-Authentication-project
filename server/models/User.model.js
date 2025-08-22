@@ -1,6 +1,14 @@
 
+
+/**
+ * User Model Schema
+ * Defines the structure for user documents in MongoDB
+ * Includes authentication fields, verification status, and OTP management
+ */
+
 import mongoose from "mongoose";
 
+// Define user schema with validation and default values
 const userSchema = new mongoose.Schema({
 
     name: {
@@ -16,6 +24,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    // Email verification fields
     verifyOtp: {
         type: String,
         default: ''
@@ -28,6 +37,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    // Password reset fields
     resetOtp: {
         type: String,
         default: ''
@@ -38,6 +48,7 @@ const userSchema = new mongoose.Schema({
     }
 })
 
+// Create or reuse existing User model to prevent recompilation errors
 const User = mongoose.models.user ||  mongoose.model("User" , userSchema);
 
 export default User;
